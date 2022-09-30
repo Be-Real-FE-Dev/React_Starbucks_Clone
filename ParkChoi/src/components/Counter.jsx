@@ -7,9 +7,13 @@ const Counter = (props) => {
         <p className={classes['count-title']}>수량</p>
       </div>
       <div className={classes['counterbox']}>
-        <button onClick={props.onDecrease}>-</button>
+        <button type="button" onClick={props.onDecrease}>
+          -
+        </button>
         <p>{props.count}</p>
-        <button onClick={props.onIncrease}>+</button>
+        <button type="button" onClick={props.onIncrease}>
+          +
+        </button>
       </div>
     </div>
   );

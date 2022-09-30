@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 // import classes from 'Order.module.css';
-import { useSelector } from 'react-redux';
+import { cartActions } from '../store/cart';
 import BeverageDesc from '../components/BeverageDesc';
 import Counter from '../components/Counter';
 
 const Order = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [count, setCount] = useState(1);
 
   const products = useSelector((state) => state.products.products);
@@ -22,13 +25,23 @@ const Order = () => {
     });
   };
 
+  const AddCartHandler = (event) => {
+    event.preventDefault();
+
+    dispatch(
+      cartActions.addCart({
+        id: params.menuId,
+        count: count,
+        isChecked: false,
+      })
+    );
+
+    navigate('/cart');
+  };
+
   if (!product) {
     return;
   }
-
-  const AddCartHandler = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <form onSubmit={AddCartHandler}>
@@ -40,13 +53,12 @@ const Order = () => {
         engName={product.engName}
         price={product.price}
       />
-
       <Counter
         onIncrease={increseHandler}
         onDecrease={decreseHandler}
         count={count}
       />
-      <button>장바구니 담기</button>
+      <button type="submit">장바구니 담기</button>
     </form>
   );
 };
