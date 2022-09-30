@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialProductsState = { products: [] };
+const initialProductsState = { products: [], product: {} };
 
 const productsSlice = createSlice({
   name: 'products',
@@ -8,6 +8,9 @@ const productsSlice = createSlice({
   reducers: {
     fetch(state, action) {
       state.products = action.payload;
+    },
+    getProductById(state, action) {
+      state.product = state.products[action.payload];
     },
   },
 });
