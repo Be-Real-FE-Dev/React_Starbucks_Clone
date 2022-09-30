@@ -1,3 +1,7 @@
+import OrderInfo from '../components/OrderInfo'
+import Amount from '../components/UI/Amount'
+import Button from '../components/UI/Button'
+
 const Cart = () => {
   return (
     <div>
@@ -15,20 +19,12 @@ const Cart = () => {
       <ul>
         <li>
           <input type="checkbox" />
-          <div>
-            <p>아메리카노</p>
-            <p>4,500원</p>
-          </div>
-          <div>
-            <buton>-</buton>
-            <span>1</span>
-            <buton>+</buton>
-          </div>
-          <img src="../" alt="이미지" />
-          <button>x</button>
+          <OrderInfo />
+          <Amount />
+          <Button>x</Button>
         </li>
       </ul>
-      <button>주문하기</button>
+      <Button>주문하기</Button>
     </div>
   );
 };

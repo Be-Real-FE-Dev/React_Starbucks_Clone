@@ -1,13 +1,12 @@
 import classes from "./OrderItem.module.css";
-
-const OrderItem = () => {
+import {Link} from 'react-router-dom';
+import OrderInfo from "./OrderInfo";
+const OrderItem = props => {
   return (
     <li className={classes.orderItem}>
-      <div>
-        <p>아메리카노</p>
-        <p>4,500원</p>
-      </div>
-      <img src="https://via.placeholder.com/100x100" alt="이미지" />
+      <Link to={`/detail/${props.item.id}`} >
+       <OrderInfo item={props.item}/>
+      </Link>
     </li>
   );
 };
