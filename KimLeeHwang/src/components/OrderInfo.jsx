@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const OrderInfo = ({item}) => {
+const OrderInfo = ({ item, styles }) => {
   return (
-    <>
+    <div className={styles}>
       <div>
         <p>{item.title}</p>
         <p>{item.price}</p>
       </div>
-      <img src="https://via.placeholder.com/100x100" alt="이미지" />
-    </>
-  )
+      <img src="" alt="이미지" />
+    </div>
+  );
 };
 
 export default OrderInfo;

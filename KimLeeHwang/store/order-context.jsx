@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 const OrderContext = React.createContext({
-  orderList : [],
+  orderList: [],
+  addOrderHandler: state => {},
 });
 
 export default OrderContext;
