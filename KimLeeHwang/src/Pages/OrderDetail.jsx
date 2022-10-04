@@ -28,6 +28,7 @@ const OrderDetail = () => {
       title: filteredData.title,
       price: filteredData.price,
       amount: count,
+      isChecked: false,
     });
 
     navigate(`/cart`);

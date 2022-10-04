@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import OrderContext from '../../store/order-context';
 import OrderInfo from '../components/OrderInfo';
 import Amount from '../components/UI/Amount';
@@ -12,20 +12,20 @@ const Cart = () => {
     const count = orderList.find(item => item.id === id).amount;
 
     if (e.target.textContent === '-' && count > 1) {
-      orderCtx.updateOrderList(
-        orderList.map(item =>
-          item.id === id ? { ...item, amount: item.amount - 1 } : item
-        )
-      );
+      orderCtx.changeAmountHandler(id, -1);
     }
 
     if (e.target.textContent === '+') {
-      orderCtx.updateOrderList(
-        orderList.map(item =>
-          item.id === id ? { ...item, amount: item.amount + 1 } : item
-        )
-      );
+      orderCtx.changeAmountHandler(id, 1);
     }
+  };
+
+  const allCheckedHandler = () => {
+    orderCtx.allCheckHandler();
+  };
+
+  const itemCheckHandler = id => {
+    orderCtx.itemCheckHandler(id);
   };
 
   return (
@@ -33,7 +33,12 @@ const Cart = () => {
       <h1>장바구니</h1>
       <div>
         <div>
-          <input type="checkbox" id="all__checked" />
+          <input
+            type="checkbox"
+            id="all__checked"
+            checked={orderCtx.isAllChecked}
+            onChange={allCheckedHandler}
+          />
           <label htmlFor="all__checked">전체 선택</label>
         </div>
         <div>
@@ -45,7 +50,11 @@ const Cart = () => {
         {orderList &&
           orderList.map(order => (
             <li key={order.id}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={order.isChecked}
+                onChange={itemCheckHandler.bind(null, order.id)}
+              />
               <OrderInfo item={order} />
               <Amount
                 onClick={clickCountHandler.bind(null, order.id)}
